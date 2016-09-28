@@ -305,6 +305,28 @@ CIniPartValue& CIniPart::operator[](LPCTSTR lpszKey)
 	return *((CIniPartValue*)it->second);
 }
 
+CIniPart::operator LPCTSTR() {
+	if (m_strFullText.length() > 0)
+		return m_strFullText.c_str();
+
+	PARTVALUEMAP::iterator it = m_mapPartValues.begin();
+	while (it != m_mapPartValues.end()) {
+		m_strFullText.append(it->first);
+		if (*(LPCTSTR)*(it->second) != L'\0') {
+			m_strFullText.append(L"=");
+			m_strFullText.append((LPCTSTR)*(it->second));
+		}
+		m_strFullText.append(L"\1");
+		++it;
+	}
+	m_strFullText.append(L"\1");
+	for (int i = 0; i < m_strFullText.length(); ++i) {
+		if (m_strFullText[i] == L'\1')
+			m_strFullText[i] = L'\0';
+	}
+	return m_strFullText.c_str();
+}
+
 LONG CIniPart::GetValueInt(LPCTSTR lpszKeyName)
 {
 	return CParseHelper::ParseInt(GetValueString(lpszKeyName));
@@ -609,6 +631,12 @@ LONG CParseIni::LoadFromString(LPCTSTR lpszString, UINT cchKeyBufferLen /* = 256
 #endif
 			if(*lpszString == _T('\r') || *lpszString == _T('\n'))
 			{
+				//allow keys without value
+				szPart1[iPos1--] = _T('\0');
+				while (szPart1[iPos1] <= 0x20)
+					szPart1[iPos1--] = _T('\0');
+				pCurrentPart->SetValue(szPart1, L"");
+				//just store it
 				iStatus = INI_STATUS_START;
 			}
 			else if(*lpszString != _T('='))

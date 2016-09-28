@@ -35,7 +35,9 @@ int main()
 	cout << "You can also get the value directly:" << endl;
 	wcout << "  LsfSharpen.Step=" << parser[_T("LsfSharpen")][_T("Step")].ToDouble() << endl;
 	wcout << "  Domain.Domain0=" << (LPCTSTR)parser[_T("Domain")][_T("Domain0")] << endl;
+	LPWSTR k = (const_cast<LPTSTR>((LPCTSTR)parser[_T("Domain")]));
 
+	wcout << "Section =" << k << endl;
     return 0;
 }
 

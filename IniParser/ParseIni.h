@@ -183,6 +183,7 @@ protected:
 	CIniPartValue m_valEmpty;
 
 private:
+	wstring m_strFullText;
 	BOOL WriteFile(HANDLE hFile);
 
 public:
@@ -194,6 +195,7 @@ public:
 	LONG GetKeyCount();
 	BOOL DeleteKey(LPCTSTR lpszKeyName);
 	CIniPartValue& operator[](LPCTSTR lpszKey);
+	operator LPCTSTR();
 	BOOL IsValueExists(LPCTSTR lpszKey);
 
 	//Navigate
