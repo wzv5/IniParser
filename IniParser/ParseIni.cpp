@@ -120,7 +120,7 @@ LPCTSTR CIniPartValue::ToResFileNameRef()
 	return m_strResFileNameTemp.c_str();
 }
 
-LPLOGFONT CIniPartValue::ToFontRef()
+/*LPLOGFONT CIniPartValue::ToFontRef()
 {
 	ToFont(&m_LogFontTemp);
 	return &m_LogFontTemp;
@@ -138,25 +138,29 @@ LPCRECT CIniPartValue::ToMarginsRef()
 	return &m_rcMarginsTemp;
 }
 
+
 BOOL CIniPartValue::ToRect(LPRECT lprcRect)
 {
 	return CParseHelper::ParseRect(m_strValue.c_str(), lprcRect);
 }
+
 
 BOOL CIniPartValue::ToMargins(LPRECT lprcMargins)
 {
 	return CParseHelper::ParseMargins(m_strValue.c_str(), lprcMargins);
 
 }
+
 BOOL CIniPartValue::ToFont(LPLOGFONT lpLogFont)
 {
 	return CParseHelper::ParseFont(m_strValue.c_str(), lpLogFont);
-}
+}*/
 
+/*
 BOOL CIniPartValue::ToFont(LPTSTR lpszFaceNameBuf, DWORD cchBufLen, LPINT lpSize, LPBOOL lpBold, LPBOOL lpItalic)
 {
 	return CParseHelper::ParseFont(m_strValue.c_str(), lpszFaceNameBuf, cchBufLen, lpSize, lpBold, lpItalic);
-}
+}*/
 
 BOOL CIniPartValue::ToResFileName(LPTSTR lpszBuf, LONG cchBufLen)
 {
@@ -342,6 +346,7 @@ POINT CIniPart::GetValuePoint(LPCTSTR lpszKeyName)
 	return CParseHelper::ParsePoint(GetValueString(lpszKeyName));
 }
 
+/*
 BOOL CIniPart::GetValueRect(LPCTSTR lpszKeyName, LPRECT lprcRect)
 {
 	return CParseHelper::ParseRect(GetValueString(lpszKeyName), lprcRect);
@@ -352,10 +357,11 @@ BOOL CIniPart::GetValueMargins(LPCTSTR lpszKeyName, LPRECT lprcRect)
 	return CParseHelper::ParseMargins(GetValueString(lpszKeyName), lprcRect);
 }
 
+
 BOOL CIniPart::GetValueFont(LPCTSTR lpszKeyName, LPLOGFONT lpLogFont)
 {
 	return CParseHelper::ParseFont(GetValueString(lpszKeyName), lpLogFont);
-}
+}*/
 
 COLORREF CIniPart::GetValueColor(LPCTSTR lpszKeyName)
 {
@@ -367,10 +373,11 @@ LONG CIniPart::GetValueResFileName(LPCTSTR lpszKeyName, LPTSTR lpszBuf, LONG cch
 	return CParseHelper::ParseResFileName(GetValueString(lpszKeyName), lpszBuf, cchBufLen);
 }
 
+/*
 BOOL CIniPart::GetValueFont(LPCTSTR lpszKeyName, LPTSTR lpszFaceNameBuf, DWORD cchBufLen, LPINT lpSize, LPBOOL lpBold, LPBOOL lpItalic)
 {
 	return CParseHelper::ParseFont(GetValueString(lpszKeyName), lpszFaceNameBuf, cchBufLen, lpSize, lpBold, lpItalic);
-}
+}*/
 
 BOOL CIniPart::GetValueBool(LPCTSTR lpszKeyName)
 {
@@ -633,7 +640,7 @@ LONG CParseIni::LoadFromString(LPCTSTR lpszString, UINT cchKeyBufferLen /* = 256
 			{
 				//allow keys without value
 				szPart1[iPos1--] = _T('\0');
-				while (szPart1[iPos1] <= 0x20)
+				while (iPos1 > 0 && szPart1[iPos1] <= 0x20)
 					szPart1[iPos1--] = _T('\0');
 				pCurrentPart->SetValue(szPart1, L"");
 				//just store it
@@ -748,6 +755,14 @@ LONG CParseIni::LoadFromString(LPCTSTR lpszString, UINT cchKeyBufferLen /* = 256
 #endif
 		}
 		lpszString++;
+	}
+
+	if (INI_STATUS_KEY == iStatus && iPos1 > 0) {
+		szPart1[iPos1--] = _T('\0');
+		while (iPos1 > 0 && szPart1[iPos1] <= 0x20)
+			szPart1[iPos1--] = _T('\0');
+		if (iPos1 > 0)
+			pCurrentPart->SetValue(szPart1, L"");
 	}
 
 	delete []szPart1;

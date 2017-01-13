@@ -136,6 +136,7 @@ public:
 	BOOL ToBool();
 	BOOL ToBool(BOOL bBoolDefault);
 	LPCTSTR ToResFileNameRef();
+/*
 	LPLOGFONT ToFontRef();
 	LPCRECT ToRectRef();
 	LPCRECT ToMarginsRef();
@@ -143,7 +144,7 @@ public:
 	BOOL ToRect(LPRECT lprcRect);
 	BOOL ToMargins(LPRECT lprcRect);
 	BOOL ToFont(LPLOGFONT lpLogFont);
-	BOOL ToFont(LPTSTR lpszFaceNameBuf, DWORD cchBufLen, LPINT lpSize, LPBOOL lpBold, LPBOOL lpItalic);
+	BOOL ToFont(LPTSTR lpszFaceNameBuf, DWORD cchBufLen, LPINT lpSize, LPBOOL lpBold, LPBOOL lpItalic);*/
 	BOOL ToResFileName(LPTSTR lpszBuf, LONG cchBufLen);
 
 };
@@ -207,10 +208,11 @@ public:
 	LONG GetValueInt(LPCTSTR lpszKeyName);
 	SIZE GetValueSize(LPCTSTR lpszKeyName);
 	POINT GetValuePoint(LPCTSTR lpszKeyName);
+/*
 	BOOL GetValueRect(LPCTSTR lpszKeyName, LPRECT lprcRect);
 	BOOL GetValueMargins(LPCTSTR lpszKeyName, LPRECT lprcRect);
 	BOOL GetValueFont(LPCTSTR lpszKeyName, LPLOGFONT lpLogFont);
-	BOOL GetValueFont(LPCTSTR lpszKeyName, LPTSTR lpszFaceNameBuf, DWORD cchBufLen, LPINT lpSize, LPBOOL lpBold, LPBOOL lpItalic);
+	BOOL GetValueFont(LPCTSTR lpszKeyName, LPTSTR lpszFaceNameBuf, DWORD cchBufLen, LPINT lpSize, LPBOOL lpBold, LPBOOL lpItalic);*/
 	COLORREF GetValueColor(LPCTSTR lpszKeyName);
 	LONG GetValueResFileName(LPCTSTR lpszKeyName, LPTSTR lpszBuf, LONG cchBufLen);
 	BOOL GetValueBool(LPCTSTR lpszKeyName);

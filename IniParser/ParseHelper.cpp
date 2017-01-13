@@ -145,6 +145,7 @@ double CParseHelper::ParseDouble(LPCTSTR lpszDouble, double fDefault)
 }
 
 
+/*
 BOOL CParseHelper::ParseFont(LPCTSTR lpszFont, LOGFONT* lpLogFont)	//FontFaceName 12 Bold
 {
 	memset(lpLogFont, 0, sizeof(LOGFONT));
@@ -190,8 +191,9 @@ BOOL CParseHelper::ParseFont(LPCTSTR lpszFont, LPTSTR lpszFaceNameBuf, DWORD cch
 
 	return TRUE;
 
-}
+}*/
 
+/*
 BOOL CParseHelper::ParseMargins(LPCTSTR lpszMargins, LPRECT lpMargins)	//X,X,X,X
 {
 	LPCTSTR pszCurrentPtr = lpszMargins;
@@ -209,7 +211,7 @@ BOOL CParseHelper::ParseMargins(LPCTSTR lpszMargins, LPRECT lpMargins)	//X,X,X,X
 BOOL CParseHelper::ParseRect(LPCTSTR lpszMargins, LPRECT lpMargins)	//X,X,X,X
 {
 	return ParseMargins(lpszMargins, lpMargins);
-}
+}*/
 
 SIZE CParseHelper::ParseSize(LPCTSTR lpszSize)	//X,X
 {
