@@ -765,6 +765,21 @@ LONG CParseIni::LoadFromString(LPCTSTR lpszString, UINT cchKeyBufferLen /* = 256
 			pCurrentPart->SetValue(szPart1, L"");
 	}
 
+	if (INI_STATUS_VALUE == iStatus && iPos2 > 0) {
+		szPart2[iPos2] = _T('\0');
+#ifndef UNICODE
+		iPos2--;
+		while (szPart2[iPos2] <= 0x20 && (iPos2 - 1 > 0) && (szPart2[iPos2 - 1] & 0x80) == 0)
+			szPart2[iPos2--] = _T('\0');
+#else
+		iPos2--;
+		while (szPart2[iPos2] <= 0x20)
+			szPart2[iPos2--] = _T('\0');
+#endif
+
+		pCurrentPart->SetValue(szPart1, szPart2);
+	}
+
 	delete []szPart1;
 	delete []szPart2;
 
