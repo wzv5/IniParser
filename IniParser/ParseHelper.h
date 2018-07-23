@@ -3,6 +3,7 @@
 
 #include <wtypes.h>
 #include <tchar.h>
+#include "strtod.h"
 
 #pragma warning(disable:4786)
 #include <string>

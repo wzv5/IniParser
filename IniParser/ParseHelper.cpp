@@ -132,8 +132,8 @@ INT32 CParseHelper::ParseInt32(LPCTSTR lpszInt32, INT32 iDefault)
 }
 
 double CParseHelper::ParseDouble(LPCTSTR lpszDouble)
-{
-	return _tcstod(lpszDouble, NULL);
+{	
+	return wstrtod(lpszDouble, NULL);
 }
 
 double CParseHelper::ParseDouble(LPCTSTR lpszDouble, double fDefault)
@@ -141,7 +141,7 @@ double CParseHelper::ParseDouble(LPCTSTR lpszDouble, double fDefault)
 	if (*lpszDouble == _T('\0'))
 		return fDefault;
 
-	return _tcstod(lpszDouble, NULL);
+	return wstrtod(lpszDouble, NULL);
 }
 
 
